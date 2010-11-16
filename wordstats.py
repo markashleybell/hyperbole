@@ -15,8 +15,10 @@ page.close()
 soup = BeautifulSoup(html)
 # Get the text from specific tags
 text = [t.text.strip() for t in soup.findAll(['p', 'h1', 'h2', 'span', 'li'])]
-# Remove all punctuation except hyphens and apostrophes
-words = re.sub('\s\'|\'\s', '', re.sub('[^a-zA-Z0-9\-\s]', '', ' '.join(text))).split(' ')
+# Remove all numbers and punctuation except hyphens and apostrophes
+words = re.sub('\s\'|\'\s|\-\s|\s\-', '', re.sub('[^a-zA-Z\-\s]', '', ' '.join(text))).split(' ')
+# Remove empty strings from the list
+words = filter(None, words)
 
 wordcount = {}
 
@@ -32,5 +34,5 @@ sorted = sorted(wordcount.items(), key=itemgetter(1), reverse=True)
 
 # Show everything with more than 5 occurrences
 for s in sorted:
-    if s[1] > 0:
+    if s[1] > 5:
         print s[0] + ': ' + str(s[1])
