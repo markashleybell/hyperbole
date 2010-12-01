@@ -7,6 +7,8 @@ file = open('stopwords.txt', 'r')
 # Remember to strip the newline characters so they match our words
 stopwords = [str(line).rstrip() for line in file]
 
+stopwords.extend(['will', 'add', 'stories', 'comments', 'us', 'new', 'just', 'nbsp'])
+
 # Get the raw HTML
 page = urllib.urlopen('http://www.dailymail.co.uk/home/index.html')
 html = page.read()
